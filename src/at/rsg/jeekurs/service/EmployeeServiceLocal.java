@@ -5,8 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.PostConstruct;
+import javax.ejb.Stateless;
+
 import at.rsg.jeekurs.domain.Employee;
 
+@Stateless  //needs Inject in EmployeeResource
 public class EmployeeServiceLocal implements EmployeeService {
 	private Map<Integer, Employee> employeeMap = new HashMap<>();
 	private static int id = 0;
@@ -14,6 +18,12 @@ public class EmployeeServiceLocal implements EmployeeService {
 	@Override
 	public List<Employee> getAll() throws ServiceException {
 		return new ArrayList<Employee>(employeeMap.values());
+	}
+	
+	//Method to see, which class i use, after 
+	@PostConstruct
+	public void postConstruct() {
+		System.out.println("EmployeServiceLocal postConstruct");
 	}
 
 	@Override

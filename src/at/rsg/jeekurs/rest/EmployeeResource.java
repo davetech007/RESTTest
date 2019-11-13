@@ -2,6 +2,8 @@ package at.rsg.jeekurs.rest;
 
 import java.util.List;
 
+import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -18,7 +20,6 @@ import javax.ws.rs.core.Response.Status;
 
 import at.rsg.jeekurs.domain.Employee;
 import at.rsg.jeekurs.service.EmployeeService;
-import at.rsg.jeekurs.service.EmployeeServiceLocalFactory;
 import at.rsg.jeekurs.service.ServiceException;
 
 
@@ -33,7 +34,11 @@ import at.rsg.jeekurs.service.ServiceException;
 @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})      //We Produce only JSON, XML also possible in Postman. In domain msut have XmlRootElement
 
 public class EmployeeResource {
-	private EmployeeService empService = EmployeeServiceLocalFactory.getInstance();  //nur 1 service bekomme, egal wo ich aufrufe
+	//private EmployeeService empService = EmployeeServiceLocalFactory.getInstance();  //nur 1 service bekomme, egal wo ich aufrufe
+	
+	//@Inject //Übernimmt EmployeeSerrviceLovalFactory!
+	@EJB(beanName = "EmployeeServiceLocal")  //Now just this will injected
+	private EmployeeService empService;
 	
 	@GET								  
 	public Response getAll() {
