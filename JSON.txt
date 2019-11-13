@@ -1,0 +1,6 @@
+{
+        "age": 19,
+        "grossVerdiener": false,
+        "name": "Tom",
+        "salary": 900
+    }
