@@ -37,7 +37,7 @@ public class EmployeeResource {
 	//private EmployeeService empService = EmployeeServiceLocalFactory.getInstance();  //nur 1 service bekomme, egal wo ich aufrufe
 	
 	//@Inject //Übernimmt EmployeeSerrviceLovalFactory!
-	@EJB(beanName = "EmployeeServiceLocal")  //Now just this will injected
+	@EJB(beanName = "EmployeeServiceJPA")  //Now just this will injected
 	private EmployeeService empService;
 	
 	@GET								  

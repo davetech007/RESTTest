@@ -2,6 +2,7 @@ package at.rsg.jeekurs.domain;
 
 import java.io.Serializable;
 
+import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -11,20 +12,26 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 @XmlRootElement   //Just for EmployeeResource MediaType.XML
+@Entity           //For JPA! Database will
+@Table(name = "EMPLOYEES")  //JPA Table name
 public class Employee implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
+	@Id   //JPA Primary key
+	@GeneratedValue(strategy = GenerationType.AUTO)   //JPA from Database automatic created
 	private Integer id;
 	
-	@NotNull
-	@NotBlank
-	@Size(max = 20, min = 3)
+	@NotNull //Bean validation
+	@NotBlank //Bean validation
+	@Size(max = 20, min = 3) //Bean validation
+	@Column(name = "fullname", nullable = false)  //JPA column name, and not null
 	private String name;
 	
-	@Min(18)
+	@Min(18)  //Bean validation
+	
 	private int age;
 	
-	@Positive
+	@Positive //Bean validation
 	private int salary;
 	
 	//@JsonbTransient
